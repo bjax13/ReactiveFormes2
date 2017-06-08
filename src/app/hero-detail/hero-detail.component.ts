@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { FormControl, FormGroup }       from '@angular/forms';
+import { FormBuilder, FormGroup , Validators }       from '@angular/forms';
 
 @Component({
   selector: 'hero-detail',
@@ -7,10 +7,16 @@ import { FormControl, FormGroup }       from '@angular/forms';
   styleUrls: ['./hero-detail.component.css']
 })
 export class HeroDetailComponent {
-  name = new FormControl();
+  heroForm: FormGroup;
 
-  heroForm = new FormGroup ({
-    name: new FormControl()
-  });
+  constructor(private fb: FormBuilder){
+    this.createForm();
+  }
+
+  createForm(){
+    this.heroForm = this.fb.group({
+      name: ['', Validators.required],
+    })
+  }
 
 }
